@@ -27,13 +27,11 @@ const TodoContainer = ():JSX.Element => {
         })
     }
     const handleDelete = (id: string):void => {
-        let deleteItem;
         axios.delete(`https://61b3b03eaf5ff70017ca2054.mockapi.io/api/todos/${id}`)
-            .then(res => {
-                deleteItem = res.data
+            .then(() => {
+                const contact = todoList.filter((item) => item.id !== id);
+                setTodoList(contact)
             })
-        const contact = todoList.filter((item) => item.id !== id);
-        setTodoList(contact)
     }
     const handleOnChange = (id: string, isDone: boolean, key: number) => {
         axios.put(`https://61b3b03eaf5ff70017ca2054.mockapi.io/api/todos/${id}`, { isDone: !isDone })

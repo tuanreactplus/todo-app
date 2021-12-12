@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {todoType} from "../../type/commonTypes";
-import axios from "axios";
 
 interface TodoListProps {
     list: todoType[]
