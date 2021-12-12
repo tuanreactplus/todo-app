@@ -1,31 +1,24 @@
-import React, {useState} from 'react'
+import React, {useEffect} from 'react'
+import {todoType} from "../../type/commonTypes";
+import axios from "axios";
 
 interface TodoListProps {
-    list: string[];
-    handleDelete: (key: number) => void;
+    list: todoType[]
+    handleDelete: (key: string) => void,
+    handleOnChange: (id: string, isDone: boolean, key: number) => void
 }
 const TodoList = (props: TodoListProps): JSX.Element => {
-    const {list, handleDelete} = props;
-    const [checkedState, setCheckedState] = useState(
-        new Array(list.length).fill(false)
-    );
-    const handleOnChange = (position: number) => {
-        const updatedCheckedState = checkedState.map((item, index) =>
-            index === position ? !item : item
-        );
-
-        setCheckedState(updatedCheckedState);
-    }
+    const {list, handleDelete, handleOnChange} = props;
     return(
         <div className={'m-todo-list'}>
             {
                 list?.map((item, index) =>
                 <div className={'m-todo-item'} key={index}>
                     <div className={'m-todo-list-checkbox'}>
-                        <input type="checkbox" checked={checkedState[index]} value={item} name={item} id={`custom-checkbox-${index}`} onChange={() => handleOnChange(index)}/>
-                        <div className={`${checkedState[index] ? 'text-linethrough':''} m-todo-task`}>{item}</div>
+                        <input type="checkbox" checked={item.isDone} value={item.todos} name={item.todos} onChange={() => handleOnChange(item.id, item.isDone, index)}/>
+                        <div className={`${item.isDone ? 'text-linethrough':''} m-todo-task`}>{item.todos}</div>
                     </div>
-                    <div className={'m-todo-list-delete'} onClick={() => handleDelete(index)}>x</div>
+                    <div className={'m-todo-list-delete'} onClick={() => handleDelete(item.id)}>x</div>
                 </div>
                 )}
         </div>

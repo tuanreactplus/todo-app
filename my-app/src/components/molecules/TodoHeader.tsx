@@ -16,7 +16,7 @@ const TodoHeader = (props: TodoHeaderProps):JSX.Element => {
     return (
         <div className={'m-todo-header-title'}>
             <div className={'m-task'}>
-                Tuan's Task
+                Tuan's Daily Task
             </div>
             <div className={'m-todo-header-right'}>
                 <Input placeholder={'Add task here'} value={value} onChange={e => setValue(e.target.value)} />
